@@ -1,0 +1,5 @@
+{
+  "name": "VocaPersona AI",
+  "description": "Intelligent video call assistant that creates a realistic avatar of the user from an uploaded image, mirroring speech and gestures in real time.",
+  "requestFramePermissions": ["camera", "microphone"]
+}

@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user authentication and profile details.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique Firebase Auth ID." },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "role": { "type": "string", "enum": ["user", "admin"] }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "Avatar": {
+      "title": "Avatar Configuration",
+      "description": "Stores the 3D avatar settings for a user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "config": { "type": "object", "description": "JSON object containing skin, hair, and clothing settings." },
+        "imageUrl": { "type": "string", "format": "uri", "description": "Reference image used to generate the avatar." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "config", "createdAt"]
+    },
+    "Call": {
+      "title": "Video Call Session",
+      "description": "Stores metadata about a video call session.",
+      "type": "object",
+      "properties": {
+        "hostId": { "type": "string" },
+        "participants": { "type": "array", "items": { "type": "string" } },
+        "startTime": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["active", "ended"] }
+      },
+      "required": ["hostId", "startTime", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile document."
+    },
+    "/avatars/{avatarId}": {
+      "schema": "Avatar",
+      "description": "Avatar configuration document."
+    },
+    "/calls/{callId}": {
+      "schema": "Call",
+      "description": "Call session document."
+    }
+  }
+}
